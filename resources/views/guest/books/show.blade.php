@@ -34,14 +34,14 @@
 
 <div class="section-bottom">
     @if (Setting::for($book)->get('poster_image_path'))
-        <img class="w-full d-block d-md-none" src="{{ Storage::url(Setting::for($book)->get('poster_image_path')) }}" alt="{{ $book->name }}">
+        <img class="w-full d-block d-md-none" src="{{ asset('uploads/'.Setting::for($book)->get('poster_image_path')) }}" alt="{{ $book->name }}">
     @else
         <div class="w-full d-block d-md-none fs-1 d-flex align-items-center justify-content-center bg-info-lt" style="min-height: 8em">{{ $book->name }}</div>
     @endif
     <div class="container-md gutter-0 home-bottom">
         <div class="card fw-bold p-3 mb-2 shadow-lg position-relative d-none d-md-block">
              @if (Setting::for($book)->get('poster_image_path'))
-                <img class="w-full" src="{{ Storage::url(Setting::for($book)->get('poster_image_path')) }}" alt="{{ $book->name }}" style="border-radius: 15px">
+                <img class="w-full" src="{{ asset('uploads/'.Setting::for($book)->get('poster_image_path')) }}" alt="{{ $book->name }}" style="border-radius: 15px">
             @else
                 <div class="w-full fs-1 d-flex align-items-center justify-content-center bg-info-lt" style="min-height: 8em">{{ $book->name }}</div>
             @endif

@@ -41,6 +41,7 @@
                         @if (Route::has('public_schedules.index'))
                             <li class="nav-item px-2"><a class="nav-link" href="{{ route('public_schedules.this_week') }}">{{ __('lecturing.public_schedule') }}</a></li>
                         @endif
+                        <li class="nav-item px-2"><a class="nav-link" href="{{ route('news.index') }}">Berita</a></li>
                         <li class="nav-item px-2"><a class="nav-link" href="{{ route('public.contact') }}">{{ __('app.contact') }}</a></li>
                     </ul>
                 </div>
@@ -84,6 +85,7 @@
                             <li class="pb-3"><a href="{{ route('public_schedules.this_week') }}">{{ __('lecturing.public_schedule') }}</a></li>
                         @endif
                         <li class="pb-3"><a href="{{ route('public.contact') }}">{{ __('app.contact') }}</a></li>
+                        <li class="pb-3"><a href="{{ route('news.index') }}">Berita Terkini</a></li>
                         <li class="py-3 border-top mt-2">
                             @if (auth()->check())
                                 <a href="{{ route('home') }}" >{{ auth()->user()->name }}</a>

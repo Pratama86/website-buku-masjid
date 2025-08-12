@@ -113,7 +113,7 @@
             </div>
             <div class="card-body">
                 @if (Setting::get('masjid_photo_path'))
-                    <img class="img-fluid" src="{{ Storage::url(Setting::get('masjid_photo_path'))}}" alt="{{ Setting::get('masjid_name', config('masjid.name')) }}">
+                    <img class="img-fluid" src="{{ asset('uploads/'.Setting::get('masjid_photo_path')) }}" alt="{{ Setting::get('masjid_name', config('masjid.name')) }}">
                 @else
                     <div class="p-4">{{ __('masjid_profile.masjid_photo') }}</div>
                 @endif

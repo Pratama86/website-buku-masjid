@@ -41,7 +41,7 @@
             </div>
             <div class="card-body">
                 @if (Setting::for($book)->get('thumbnail_image_path'))
-                    <img class="img-fluid" src="{{ Storage::url(Setting::for($book)->get('thumbnail_image_path')) }}" alt="{{ $book->name }}">
+                    <img class="img-fluid" src="{{ asset('uploads/'.Setting::for($book)->get('thumbnail_image_path')) }}" alt="{{ $book->name }}">
                 @else
                     {{ __('book.thumbnail_image') }}
                 @endif

@@ -29,7 +29,7 @@
         <h4 class="text-primary">{{ __('book.thumbnail_image') }}</h4>
         <div class="form-group" id="book-thumbnail">
             @if (Setting::for($book)->get('thumbnail_image_path'))
-                <img id="book_thumbnail_image_show" class="img-fluid" src="{{ Storage::url(Setting::for($book)->get('thumbnail_image_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
+                <img id="book_thumbnail_image_show" class="img-fluid" src="{{ asset('uploads/'.Setting::for($book)->get('thumbnail_image_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
             @endif
         </div>
         @php

@@ -8,7 +8,7 @@
         <div class="row align-items-center justify-content-center">
             <div class="me-lg-3 d-sm-none d-flex justify-content-center">
                 @if (Setting::get('masjid_logo_path'))
-                    <div class="mb-3"><img src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" style="width: 100px"></div>
+                    <div class="mb-3"><img src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" style="width: 100px"></div>
                 @endif
             </div>
             <div class="col-lg-3 me-lg-3 d-none d-sm-inline">

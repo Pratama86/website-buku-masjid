@@ -32,7 +32,7 @@
             <tr>
                 <td style="width:140px;">
                     @if (Setting::get('masjid_logo_path'))
-                        <img src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" style="width: 75px">
+                        <img src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" style="width: 75px">
                     @endif
                 </td>
                 <td style="width:330px">

@@ -13,6 +13,7 @@
 
 Route::view('/', 'guest.welcome');
 Route::view('/kontak', 'guest.contact')->name('public.contact');
+Route::get('berita', 'NewsController@index')->name('news.index');
 Route::get('/programs', 'PublicBookController@index')->name('public.books.index');
 Route::get('/programs/{book}', 'PublicBookController@show')->name('public.books.show');
 

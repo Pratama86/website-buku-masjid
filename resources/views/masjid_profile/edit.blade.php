@@ -44,7 +44,7 @@
                         <label>{{ __('masjid_profile.masjid_logo') }}</label>
                         <div class="form-group" id="masjid-logo">
                             @if (Setting::get('masjid_logo_path'))
-                                <img id="masjid_logo_image_show" class="img-fluid" src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
+                                <img id="masjid_logo_image_show" class="img-fluid" src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
                             @endif
                         </div>
                         @php
@@ -67,7 +67,7 @@
                         <label>{{ __('masjid_profile.masjid_photo') }}</label>
                         <div class="form-group" id="masjid-photo">
                             @if (Setting::get('masjid_photo_path'))
-                                <img id="masjid_photo_image_show" class="img-fluid" src="{{ Storage::url(Setting::get('masjid_photo_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
+                                <img id="masjid_photo_image_show" class="img-fluid" src="{{ asset('uploads/'.Setting::get('masjid_photo_path'))}}" alt="{{ Setting::get('masjid_name') ?? 'buku masjid'}}">
                             @endif
                         </div>
                         @php

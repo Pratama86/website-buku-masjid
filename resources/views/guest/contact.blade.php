@@ -15,7 +15,7 @@
                     @if (Setting::get('masjid_latitude') && Setting::get('masjid_longitude'))
                         @if (Setting::get('masjid_photo_path'))
                             <div class="d-none d-lg-inline position-absolute card p-2 shadow" style="width: 300px; z-index: 5; bottom: -40px; left: -30px">
-                                <img src="{{ Storage::url(Setting::get('masjid_photo_path'))}}">
+                                <img src="{{ asset('uploads/'.Setting::get('masjid_photo_path'))}}">
                             </div>
                         @endif
                         <div class="card p-3 shadow-lg" style="z-index: 0">
@@ -24,7 +24,7 @@
                     @else
                         @if (Setting::get('masjid_photo_path'))
                             <div class="card p-2 shadow">
-                                <img src="{{ Storage::url(Setting::get('masjid_photo_path'))}}">
+                                <img src="{{ asset('uploads/'.Setting::get('masjid_photo_path'))}}">
                             </div>
                         @endif
                     @endif

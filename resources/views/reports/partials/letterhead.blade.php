@@ -4,7 +4,7 @@
             <tr>
                 @if (Setting::get('masjid_logo_path'))
                     <td style="border: 0px; border-bottom: 1px solid #000; width: 120px" class="text-center">
-                        <img src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" style="width: 75px">
+                        <img src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" style="width: 75px">
                     </td>
                     <td style="border: 0px; border-bottom: 1px solid #000;height: 78px; padding-right: 10%" class="text-center">
                 @else

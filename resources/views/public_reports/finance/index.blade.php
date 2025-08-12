@@ -12,7 +12,7 @@
                 @if (Setting::get('masjid_logo_path'))
                     <div class="mb-3">
                         <a href="{{ route('public_reports.index') }}">
-                            <img src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" style="width: 80px">
+                            <img src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" style="width: 80px">
                         </a>
                     </div>
                 @endif

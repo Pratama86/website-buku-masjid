@@ -28,6 +28,9 @@ class Kernel extends ConsoleKernel
         $backupCommand .= ' --destination=local --compression=gzip';
         $backupCommand .= ' --destinationPath=backup/db/auto.'.date('Y-m-d_Hi');
         $schedule->command($backupCommand)->dailyAt('03:00');
+
+        // Fetch daily news
+        $schedule->command('news:fetch')->daily();
     }
 
     /**

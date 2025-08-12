@@ -2,7 +2,7 @@
     @if (Setting::get('masjid_logo_path'))
         <div class="mb-3">
             <a href="{{ url('/') }}">
-                <img src="{{ Storage::url(Setting::get('masjid_logo_path'))}}" style="width: 150px">
+                <img src="{{ asset('uploads/'.Setting::get('masjid_logo_path'))}}" style="width: 150px">
             </a>
         </div>
     @endif

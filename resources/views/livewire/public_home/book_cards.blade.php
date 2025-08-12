@@ -12,7 +12,7 @@
                             <div class="carousel-item @if ($loop->first) active @endif">
                                 <a href="{{ route('public.books.show', $publicBook) }}" class="position-relative d-block p-3">
                                     @if (Setting::for($publicBook)->get('poster_image_path'))
-                                        <img src="{{ Storage::url(Setting::for($publicBook)->get('poster_image_path')) }}" class="w-100 h-100 object-cover" alt="{{ $publicBook->name }}" style="border-radius: 15px;">
+                                        <img src="{{ asset('uploads/'.Setting::for($publicBook)->get('poster_image_path')) }}" class="w-100 h-100 object-cover" alt="{{ $publicBook->name }}" style="border-radius: 15px;">
                                     @else
                                         <div class="p-3 fs-1 d-flex align-items-center justify-content-center bg-info-lt" style="min-height: 320px; border-radius: 15px;">{{ $publicBook->name }}</div>
                                     @endif

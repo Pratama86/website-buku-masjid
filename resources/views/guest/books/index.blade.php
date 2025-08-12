@@ -79,7 +79,7 @@
                     <div class="card">
                         <div>
                             @if (Setting::for($publicBook)->get('poster_image_path'))
-                                <img src="{{ Storage::url(Setting::for($publicBook)->get('poster_image_path')) }}" class="w-100 h-100 object-cover" alt="{{ $publicBook->name }}" style="border-radius: 15px 15px 0px 0px;">
+                                <img src="{{ asset('uploads/'.Setting::for($publicBook)->get('poster_image_path')) }}" class="w-100 h-100 object-cover" alt="{{ $publicBook->name }}" style="border-radius: 15px 15px 0px 0px;">
                             @else
                                 <div class="p-3 fs-1 d-flex align-items-center justify-content-center bg-info-lt" style="min-height: 207px;border-radius: 15px 15px 0px 0px;">{{ $publicBook->name }}</div>
                             @endif
