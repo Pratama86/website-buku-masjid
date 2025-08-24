@@ -36,6 +36,9 @@ if (config('features.lecturings.is_active')) {
     });
 }
 
+Route::get('qurban/{qurban}/register', 'QurbanRegistrationController@create')->name('qurban.register');
+Route::post('qurban/{qurban}/register', 'QurbanRegistrationController@store')->name('qurban.register.store');
+
 // Change Password Routes
 Route::get('change-password', 'Auth\ChangePasswordController@show');
 Route::patch('change-password', 'Auth\ChangePasswordController@update')->name('password.change');
@@ -152,4 +155,10 @@ Route::group(['middleware' => 'auth'], function () {
      * Users Routes
      */
     Route::resource('users', App\Http\Controllers\UserController::class);
+
+    /*
+     * Qurban Routes
+     */
+    Route::resource('qurban', 'QurbanController');
+    Route::resource('qurban.offerings', 'QurbanOfferingController');
 });
