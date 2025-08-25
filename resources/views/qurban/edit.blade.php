@@ -7,11 +7,15 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">{{ __('qurban.edit') }}</h3></div>
-            {!! Form::model($qurban, ['route' => ['qurban.update', $qurban], 'method' => 'patch']) !!}
+            {!! Form::model($qurban, ['route' => ['qurban.update', $qurban], 'method' => 'patch', 'files' => true]) !!}
             <div class="panel-body">
                 {!! FormField::text('name', ['required' => true, 'label' => __('qurban.name')]) !!}
                 {!! FormField::text('year_hijri', ['required' => true, 'label' => __('qurban.year_hijri')]) !!}
                 {!! FormField::text('registration_deadline', ['required' => true, 'label' => __('qurban.registration_deadline'), 'class' => 'date-select']) !!}
+                {!! FormField::file('image', ['label' => __('qurban.image'), 'info' => ['text' => 'Ekstensi yang diizinkan: jpg, jpeg, png. Ukuran maksimal: 2MB.']]) !!}
+                @if ($qurban->image_path)
+                    <img src="{{ asset('uploads/' . $qurban->image_path) }}" alt="{{ $qurban->name }}" class="img-thumbnail" width="200">
+                @endif
             </div>
             <div class="panel-footer">
                 {!! Form::submit(__('qurban.update'), ['class' => 'btn btn-success']) !!}
@@ -39,11 +43,8 @@
                 <div class="panel-footer">
                     {!! FormField::delete(
                         ['route' => ['qurban.destroy', $qurban]],
-                        __('app.delete_confirm_button'),
-                        ['class' => 'btn btn-danger'],
-                        [
-                            'qurban_id' => $qurban->id,
-                        ]
+                        ['class' => 'btn btn-danger', 'id' => 'delete-qurban-'.$qurban->id, 'text' => __('app.delete_confirm_button')],
+                        ['qurban_id' => $qurban->id]
                     ) !!}
                     {{ link_to_route('qurban.edit', __('app.cancel'), [$qurban], ['class' => 'btn btn-default']) }}
                 </div>

@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'guest.welcome');
+Route::get('/', 'HomeController@index')->name('public.home');
 Route::view('/kontak', 'guest.contact')->name('public.contact');
 Route::get('berita', 'NewsController@index')->name('news.index');
 Route::get('/programs', 'PublicBookController@index')->name('public.books.index');

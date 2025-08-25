@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BankAccount;
 use App\Models\Book;
+use App\Models\QurbanEvent;
 
 class PublicBookController extends Controller
 {
@@ -13,8 +14,10 @@ class PublicBookController extends Controller
         $publicBooks = Book::where('report_visibility_code', Book::REPORT_VISIBILITY_PUBLIC)
             ->where('report_periode_code', Book::REPORT_PERIODE_ALL_TIME)
             ->get();
+        $activeQurbanEvents = QurbanEvent::where('registration_deadline', '>=', today())
+            ->with('offerings.participants')->latest()->get();
 
-        return view('guest.books.index', compact('bankAccounts', 'publicBooks'));
+        return view('guest.books.index', compact('bankAccounts', 'publicBooks', 'activeQurbanEvents'));
     }
 
     public function show(Book $book)

@@ -70,6 +70,48 @@
             @endforelse
         </div>
         <div class="pt-3 mt-4 border-top">
+            <h2 class="fw-bolder">Program Spesial</h2>
+        </div>
+        @if ($activeQurbanEvents->isNotEmpty())
+            <div class="row row-cols-lg-3">
+                @foreach ($activeQurbanEvents as $qurbanEvent)
+                <div class="col-md-6 mt-3">
+                    <div class="card">
+                        <div>
+                            @if ($qurbanEvent->image_path)
+                                <img src="{{ asset('uploads/' . $qurbanEvent->image_path) }}" class="w-100 h-100 object-cover" alt="{{ $qurbanEvent->name }}" style="border-radius: 15px 15px 0px 0px;">
+                            @else
+                                <div class="p-3 fs-1 d-flex align-items-center justify-content-center bg-success-lt" style="min-height: 207px;border-radius: 15px 15px 0px 0px;">{{ $qurbanEvent->name }}</div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="p-4">
+                                <h3 class="fs-1">{{ $qurbanEvent->name }}</h3>
+                                <div class="text-secondary py-3 mt-3">Batas pendaftaran: {{ $qurbanEvent->registration_deadline }}</div>
+                                @php
+                                    $totalParticipants = $qurbanEvent->offerings->sum(function ($offering) {
+                                        return $offering->participants->count();
+                                    });
+                                    $totalLimit = $qurbanEvent->offerings->sum('participant_limit');
+                                    $isFull = $totalLimit > 0 && $totalParticipants >= $totalLimit;
+                                @endphp
+                                <div class="alert alert-info">
+                                    Jumlah Pendaftar Saat Ini: <strong>{{ $totalParticipants }}</strong>
+                                    @if ($totalLimit)
+                                        / <strong>{{ $totalLimit }}</strong> orang
+                                    @endif
+                                </div>
+                                <a href="{{ route('qurban.register', $qurbanEvent) }}" class="btn {{ $isFull ? 'btn-danger' : 'btn-success' }} mt-3" role="button" style="border-radius: 9px !important;" {{ $isFull ? 'disabled' : '' }}>
+                                    {{ $isFull ? 'Kuota Penuh' : 'Daftar Qurban Sekarang' }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @endif
+        <div class="pt-3 mt-4 border-top">
             <h2 class="fw-bolder">{{ __('book.program') }}</h2>
         </div>
         @if ($publicBooks->isEmpty() == false)

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\QurbanEvent;
-
-use Illuminate\Http\Request;
 
 class QurbanController extends Controller
 {
@@ -24,13 +22,25 @@ class QurbanController extends Controller
 
     public function store(Request $request)
     {
+        Log::info('Qurban Event Store - Request Data:', ['request' => $request->all()]);
+        Log::info('Qurban Event Store - Has File Image (before if):', ['hasFile' => $request->hasFile('image')]);
         $this->validate($request, [
             'name' => 'required|string|max:60',
             'year_hijri' => 'required|digits:4',
             'registration_deadline' => 'required|date',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        QurbanEvent::create($request->all());
+        $newQurbanEvent = $request->except('image');
+        Log::info('Qurban Event Store - Has File Image:', ['hasFile' => $request->hasFile('image')]);
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('qurban_events', 'public');
+            $newQurbanEvent['image_path'] = $path;
+            Log::info('Qurban Event Store - Path:', ['path' => $path]);
+            Log::info('Qurban Event Store - Data:', ['data' => $newQurbanEvent]);
+        }
+
+        QurbanEvent::create($newQurbanEvent);
 
         return redirect()->route('qurban.index')->with('success', __('qurban.created'));
     }
@@ -49,13 +59,25 @@ class QurbanController extends Controller
 
     public function update(Request $request, QurbanEvent $qurban)
     {
+        Log::info('Qurban Event Update - Request Data:', ['request' => $request->all()]);
+        Log::info('Qurban Event Update - Has File Image (before if):', ['hasFile' => $request->hasFile('image')]);
         $this->validate($request, [
             'name' => 'required|string|max:60',
             'year_hijri' => 'required|digits:4',
             'registration_deadline' => 'required|date',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $qurban->update($request->all());
+        $updatedQurbanEvent = $request->except('image');
+        Log::info('Qurban Event Update - Has File Image:', ['hasFile' => $request->hasFile('image')]);
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('qurban_events', 'public');
+            $updatedQurbanEvent['image_path'] = $path;
+            Log::info('Qurban Event Update - Path:', ['path' => $path]);
+            Log::info('Qurban Event Update - Data:', ['data' => $updatedQurbanEvent]);
+        }
+
+        $qurban->update($updatedQurbanEvent);
 
         return redirect()->route('qurban.show', $qurban)->with('success', __('qurban.updated'));
     }

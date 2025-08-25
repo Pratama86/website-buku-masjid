@@ -24,6 +24,7 @@
         </div>
     </div>
 </section>
+
 <div class="section-bottom">
     <div class="container-md home-bottom">
         <div>

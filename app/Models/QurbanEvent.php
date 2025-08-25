@@ -10,7 +10,7 @@ class QurbanEvent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'year_hijri', 'registration_deadline'];
+    protected $fillable = ['name', 'year_hijri', 'registration_deadline', 'image_path'];
 
     public function offerings(): HasMany
     {

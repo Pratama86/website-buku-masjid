@@ -27,6 +27,21 @@
                         {!! $errors->first('qurban_offering_id', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
                     </div>
 
+                    @php
+                        $totalParticipants = $qurban->offerings->sum(function ($offering) {
+                            return $offering->participants->count();
+                        });
+                        $totalLimit = $qurban->offerings->sum('participant_limit');
+                        $isFull = $totalLimit > 0 && $totalParticipants >= $totalLimit;
+                    @endphp
+
+                    <div class="alert alert-info">
+                        Jumlah Pendaftar Saat Ini: <strong>{{ $totalParticipants }}</strong>
+                        @if ($totalLimit)
+                            / <strong>{{ $totalLimit }}</strong> orang
+                        @endif
+                    </div>
+
                     <div class="form-group">
                         {!! Form::label('name', 'Nama Lengkap Anda') !!}
                         {!! Form::text('name', null, ['class' => 'form-control', 'required' => true]) !!}
@@ -39,7 +54,7 @@
                         {!! $errors->first('phone_number', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
                     </div>
 
-                    {!! Form::submit('Daftar Sekarang', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Daftar Sekarang', ['class' => 'btn ' . ($isFull ? 'btn-danger' : 'btn-primary'), 'disabled' => $isFull]) !!}
                     <a href="{{ url('/') }}" class="btn btn-link">Kembali ke Beranda</a>
                     {!! Form::close() !!}
                 </div>

@@ -21,7 +21,7 @@ class QurbanEventPolicy
      */
     public function view(User $user, QurbanEvent $qurbanEvent): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class QurbanEventPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class QurbanEventPolicy
      */
     public function update(User $user, QurbanEvent $qurbanEvent): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class QurbanEventPolicy
      */
     public function delete(User $user, QurbanEvent $qurbanEvent): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class QurbanEventPolicy
      */
     public function restore(User $user, QurbanEvent $qurbanEvent): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class QurbanEventPolicy
      */
     public function forceDelete(User $user, QurbanEvent $qurbanEvent): bool
     {
-        //
+        return true;
     }
 }

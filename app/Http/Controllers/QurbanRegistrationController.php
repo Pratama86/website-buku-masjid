@@ -11,7 +11,7 @@ class QurbanRegistrationController extends Controller
 {
     public function create(QurbanEvent $qurban)
     {
-        $qurban->load('offerings');
+        $qurban->load('offerings.participants');
         return view('qurban.register', compact('qurban'));
     }
 
@@ -23,7 +23,11 @@ class QurbanRegistrationController extends Controller
             'phone_number' => 'required|string|max:20',
         ]);
 
-        $offering = $qurban->offerings()->findOrFail($request->get('qurban_offering_id'));
+        $offering = $qurban->offerings()->withCount('participants')->findOrFail($request->get('qurban_offering_id'));
+
+        if ($offering->participant_limit && $offering->participants_count >= $offering->participant_limit) {
+            return redirect()->back()->with('error', 'Maaf, kuota untuk '.$offering->name.' sudah penuh.');
+        }
 
         $transaction = new Transaction;
         $transaction->date = today()->format('Y-m-d');
@@ -40,7 +44,7 @@ class QurbanRegistrationController extends Controller
             'transaction_id' => $transaction->id,
             'name' => $request->get('name'),
             'phone_number' => $request->get('phone_number'),
-            'status' => 'registered',
+            'status' => 'pending',
         ]);
 
         return redirect()->route('qurban.register', $qurban)->with('success', 'Pendaftaran Anda telah berhasil.');

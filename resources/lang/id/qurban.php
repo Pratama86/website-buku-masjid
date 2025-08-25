@@ -31,4 +31,5 @@ return [
     'name' => 'Nama Acara',
     'year_hijri' => 'Tahun Hijriah',
     'registration_deadline' => 'Batas Waktu Pendaftaran',
+    'image' => 'Gambar Poster',
 ];
