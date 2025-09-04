@@ -161,4 +161,21 @@ Route::group(['middleware' => 'auth'], function () {
      */
     Route::resource('qurban', 'QurbanController');
     Route::resource('qurban.offerings', 'QurbanOfferingController');
+    Route::get('qurban/{qurban}/participants', 'QurbanController@participants')->name('qurban.participants');
+    Route::delete('qurban/{qurban}/participants/{participant}', 'QurbanController@destroyParticipant')->name('qurban.participants.destroy');
+
+    /*
+     * Library Routes
+     */
+    Route::resource('library', 'LibraryController');
+    Route::post('library/{book}/loan', 'BookLoanController@store')->name('library.loan');
+    Route::group(['prefix' => 'admin/library', 'as' => 'admin.library.', 'middleware' => 'auth'], function () {
+        Route::get('/', 'LibraryController@adminIndex')->name('index');
+        Route::get('/create', 'LibraryController@create')->name('create');
+        Route::post('/', 'LibraryController@store')->name('store');
+        Route::get('/{book}/edit', 'LibraryController@edit')->name('edit');
+        Route::put('/{book}', 'LibraryController@update')->name('update');
+        Route::delete('/{book}', 'LibraryController@destroy')->name('destroy');
+    });
 });
+ 

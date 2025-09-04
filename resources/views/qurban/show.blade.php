@@ -32,6 +32,7 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('qurban_offering.list') }}</h3>
                 <div class="card-options">
+                    {{ link_to_route('qurban.participants', __('qurban.view_participants'), $qurban, ['class' => 'btn btn-info btn-sm']) }}
                     @can('create', new App\Models\QurbanOffering)
                         {{ link_to_route('qurban.offerings.create', __('qurban_offering.create'), $qurban, ['class' => 'btn btn-success btn-sm']) }}
                     @endcan

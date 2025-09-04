@@ -11,7 +11,7 @@ class QurbanParticipant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['qurban_offering_id', 'transaction_id', 'name', 'phone_number', 'status'];
+    protected $fillable = ['qurban_offering_id', 'transaction_id', 'name', 'phone_number', 'status', 'photo_path'];
 
     public function offering(): BelongsTo
     {

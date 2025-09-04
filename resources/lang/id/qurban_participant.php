@@ -10,4 +10,6 @@ return [
     'name' => 'Nama Peserta',
     'phone_number' => 'No. Telepon',
     'status' => 'Status',
+    'offering' => 'Hewan Qurban',
+    'photo' => 'Foto',
 ];

@@ -43,5 +43,38 @@ class StaticQurbanOfferingsSeeder extends Seeder
                 'participant_limit' => null,
             ],
         ]);
+
+        $qurbanEvent2 = QurbanEvent::firstOrCreate(
+            ['id' => 2],
+            [
+                'name' => 'Qurban 1447 H',
+                'year_hijri' => '1447',
+                'registration_deadline' => '2026-06-16',
+            ]
+        );
+
+        // Clear existing offerings for this event to avoid duplicates
+        $qurbanEvent2->offerings()->delete();
+
+        $qurbanEvent2->offerings()->createMany([
+            [
+                'type' => 'cow_share',
+                'name' => 'Sapi',
+                'price' => 20000000,
+                'participant_limit' => 7,
+            ],
+            [
+                'type' => 'goat',
+                'name' => 'Kambing',
+                'price' => 3000000,
+                'participant_limit' => 1,
+            ],
+            [
+                'type' => 'camel',
+                'name' => 'Unta',
+                'price' => 30000000,
+                'participant_limit' => null,
+            ],
+        ]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\QurbanEvent;
+use App\Models\QurbanParticipant;
+use Illuminate\Support\Facades\Storage;
 
 class QurbanController extends Controller
 {
@@ -93,5 +95,25 @@ class QurbanController extends Controller
         }
 
         return back()->with('error', __('qurban.undeleted'));
+    }
+
+    public function participants(QurbanEvent $qurban)
+    {
+        $qurban->load('offerings.participants.offering');
+
+        return view('qurban.participants', compact('qurban'));
+    }
+
+    public function destroyParticipant(QurbanEvent $qurban, QurbanParticipant $participant)
+    {
+        $this->authorize('delete', $participant);
+
+        if ($participant->photo_path) {
+            Storage::disk('public')->delete($participant->photo_path);
+        }
+
+        $participant->delete();
+
+        return redirect()->route('qurban.participants', $qurban)->with('success', __('qurban_participant.deleted'));
     }
 }

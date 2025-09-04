@@ -116,5 +116,25 @@
     <script src="{{ asset('js/app.js') }}" ></script>
     @include('layouts.partials.noty')
     @stack('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Library alert script loaded');
+            setInterval(function() {
+                let alert = document.createElement('div');
+                alert.innerHTML = '<div class="alert alert-info alert-dismissible fade show" role="alert">' +
+                    '<a href="{{ route("library.index") }}" class="alert-link">Kunjungi perpustakaan kami!</a>' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>';
+                document.body.appendChild(alert);
+
+                setTimeout(function() {
+                    alert.remove();
+                }, 10000);
+            }, 300000);
+        });
+    </script>
 </body>
 </html>

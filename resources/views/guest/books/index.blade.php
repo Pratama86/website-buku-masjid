@@ -95,13 +95,46 @@
                                     $totalLimit = $qurbanEvent->offerings->sum('participant_limit');
                                     $isFull = $totalLimit > 0 && $totalParticipants >= $totalLimit;
                                 @endphp
-                                <div class="alert alert-info">
-                                    Jumlah Pendaftar Saat Ini: <strong>{{ $totalParticipants }}</strong>
-                                    @if ($totalLimit)
-                                        / <strong>{{ $totalLimit }}</strong> orang
-                                    @endif
+                                <div class="alert alert-info d-flex justify-content-between align-items-center">
+                                    <span>
+                                        Jumlah Pendaftar Saat Ini: <strong>{{ $totalParticipants }}</strong>
+                                        @if ($totalLimit)
+                                            / <strong>{{ $totalLimit }}</strong> orang
+                                        @endif
+                                    </span>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#participantsModal-{{ $qurbanEvent->id }}">
+                                        <i class="ti ti-eye"></i>
+                                    </button>
                                 </div>
-                                <a href="{{ route('qurban.register', $qurbanEvent) }}" class="btn {{ $isFull ? 'btn-danger' : 'btn-success' }} mt-3" role="button" style="border-radius: 9px !important;" {{ $isFull ? 'disabled' : '' }}>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="participantsModal-{{ $qurbanEvent->id }}" tabindex="-1" aria-labelledby="participantsModalLabel-{{ $qurbanEvent->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="participantsModalLabel-{{ $qurbanEvent->id }}">Daftar Peserta Qurban: {{ $qurbanEvent->name }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="list-group">
+                                                    @forelse ($qurbanEvent->offerings->flatMap->participants as $participant)
+                                                        <li class="list-group-item">{{ $participant->name }}</li>
+                                                    @empty
+                                                        <li class="list-group-item">Belum ada pendaftar.</li>
+                                                    @endforelse
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="{{ $isFull ? 'javascript:void(0)' : route('qurban.register', $qurbanEvent) }}" 
+                                   class="btn {{ $isFull ? 'btn-danger' : 'btn-success' }} mt-3" 
+                                   role="button" 
+                                   style="border-radius: 9px !important;" 
+                                   onclick="{{ $isFull ? 'alert(\'Maaf, kuota untuk qurban ini sudah penuh.\')' : '' }}">
                                     {{ $isFull ? 'Kuota Penuh' : 'Daftar Qurban Sekarang' }}
                                 </a>
                             </div>

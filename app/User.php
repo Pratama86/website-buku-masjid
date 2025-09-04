@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->is_active ? __('app.active') : __('app.inactive');
     }
+
+    public function isAdmin()
+    {
+        return $this->role_id == self::ROLE_ADMIN;
+    }
 }

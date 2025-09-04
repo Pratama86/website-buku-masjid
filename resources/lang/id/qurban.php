@@ -32,4 +32,5 @@ return [
     'year_hijri' => 'Tahun Hijriah',
     'registration_deadline' => 'Batas Waktu Pendaftaran',
     'image' => 'Gambar Poster',
+    'view_participants' => 'Lihat Pendaftar',
 ];
